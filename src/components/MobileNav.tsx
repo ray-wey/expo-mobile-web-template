@@ -35,23 +35,40 @@ export default function MobileNav({ active, onSelect }: Props) {
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={[styles.bar, { paddingBottom: Math.max(insets.bottom, spacing.sm) }]}>
-      {TABS.map((tab) => (
-        <Tab key={tab.key} tab={tab} isActive={active === tab.key} onPress={() => onSelect(tab.key)} />
-      ))}
+    <View style={[styles.wrapper, { paddingBottom: Math.max(insets.bottom, spacing.sm) }]}>
+      <View style={styles.bar}>
+        {TABS.map((tab) => (
+          <Tab key={tab.key} tab={tab} isActive={active === tab.key} onPress={() => onSelect(tab.key)} />
+        ))}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingHorizontal: spacing.md,
+    alignItems: 'center',
+  },
   bar: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingTop: spacing.sm,
+    width: '100%',
+    paddingVertical: spacing.sm + 4,
     backgroundColor: colors.surface,
-    borderTopWidth: 1,
-    borderTopColor: colors.border,
+    borderRadius: radius.full,
+    borderWidth: 1,
+    borderColor: colors.border,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.4,
+    shadowRadius: 16,
+    elevation: 12,
   },
   tab: {
     alignItems: 'center',
